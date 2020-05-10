@@ -53,7 +53,7 @@
 #include "common.h"
 
 #include "sd.h"
-q
+
 #include LC_LIBDEFS_FILE
 
 #define SAGASD_HEADS    16
