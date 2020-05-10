@@ -57,7 +57,7 @@
 
 #define SAGASD_HEADS    16
 #define SAGASD_SECTORS  64
-#define SAGASD_RETRY    5      /* By default, retry up to N times */
+#define SAGASD_RETRY    6      /* By default, retry up to N times */
 
 #undef DEBUG
 #define DEBUG 0
@@ -66,11 +66,9 @@
 #define bug(x,args...)   kprintf(x ,##args)
 #define debug(x,args...) bug("%s:%ld " x "\n", __func__, (unsigned long)__LINE__ ,##args)
 #else
-#define bug(x,args...)   do { } while (0)
-#define debug(x,args...) do { } while (0)
+#define bug(x,args...)   asm("nop\r\n")
+#define debug(x,args...) asm("nop\r\n")
 #endif
-
-extern const char terminator;
 
 static VOID SAGASD_log(struct sdcmd *sd, int level, const char *format, ...)
 {

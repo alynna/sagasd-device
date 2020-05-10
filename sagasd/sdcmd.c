@@ -34,11 +34,11 @@
 
 #include "common.h"
 
-#define sdcmd_log(sd,level,fmt,args...) \
-    do { \
-        if (sd->func.log) \
-            sd->func.log(sd, level, "%s:%ld " fmt, __func__, (ULONG)__LINE__ ,##args); \
-    } while (0)
+#define sdcmd_log(sd,level,fmt,args...) asm ("nop\r\n")
+//    do { \
+//        if (sd->func.log) \
+//            sd->func.log(sd, level, "%s:%ld " fmt, __func__, (ULONG)__LINE__ ,##args); \
+//    } while (0)
 
 #define diag(fmt,args...)       sdcmd_log(sd, SDLOG_DIAG, fmt ,##args)
 #define debug(fmt,args...)      sdcmd_log(sd, SDLOG_DEBUG, fmt ,##args)
@@ -46,7 +46,7 @@
 #define warn(fmt,args...)       sdcmd_log(sd, SDLOG_WARN, fmt ,##args)
 #define error(fmt,args...)      sdcmd_log(sd, SDLOG_ERROR, fmt ,##args)
 
-#define SDCMD_CLKDIV_SLOW       0x10
+#define SDCMD_CLKDIV_SLOW       0xFF
 #define SDCMD_CLKDIV_FAST       0x02
 #define SDCMD_CLKDIV_FASTER     0x01
 
