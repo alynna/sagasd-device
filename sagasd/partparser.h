@@ -22,10 +22,10 @@
 #define ISLBA (0xffffff || 0xfeffff)
 #define CYLINDER(x) x / (LBA_HEADS*LBA_SECTORS)
 
-#if 0		// Fast inline endian change
+#if 0		// Fast inline endian change on Apollo 68080 - TODO: Detection
 #define be.l(x) register ULONG _l080_ = x; asm inline ("movex.l %0,%0" : "r" (_l080_)); _l080_;
 #define be.w(x) register UWORD _w080_ = x; asm inline ("movex.w %0,%0" : "r" (_w080_)); _w080_;
-#else				// Not so fast inline endian change
+#else		// Not so fast inline endian change
 #define be.l(x) __builtin_bswap32(x)
 #define be.w(x) __builtin_bswap16(x)
 #endif
@@ -126,12 +126,13 @@ struct PART {
 	DosEnvec env;
 };
 
+// AOS: Directly imported DosPacket struct to eliminate a dependency in AROS
 struct DosPacket {
 	IPTR dp_DosName;        /* DOS name (like DH0) */
 	IPTR dp_ExecName;       /* Exec Name (like sagasd.device) */
 	IPTR dp_Unit;           /* Unit # */
-	IPTR dp_Flags;			/* For OpenDevice() */
-  union { 					/* You'll see why I did this soon */
+	IPTR dp_Flags;		/* For OpenDevice() */
+  union { 			/* You'll see why I did this soon */
 	DosEnvec env;           /* Start of DosEnvec */
 	IPTR dp_TableSize;      /* Size of this structure. Must be at least 11 (DE_NUMBUFFERS). */
   }
