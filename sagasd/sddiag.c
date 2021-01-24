@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016, Jason S. McMullan <jason.mcmullan@gmail.com>
+ * Copyright (C) 2020, Alynna Trypnotk <alynna@kitsunet.net>
  * All rights reserved.
  *
  * Licensed under the MIT License:

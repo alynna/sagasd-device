@@ -1,6 +1,7 @@
 /* Raw SD interface
  *
  * Copyright (C) 2016, Jason S. McMullan <jason.mcmullan@gmail.com>
+ * Copyright (C) 2020, Alynna Trypnotk <alynna@kitsunet.net>
  * All rights reserved.
  *
  * Licensed under the MIT License:
@@ -169,11 +170,11 @@ static UWORD sdcmd_ins(struct sdcmd *sd, UWORD crc, UBYTE *buff, size_t len)
 
     return crc;
 }
-            
+
 BOOL sdcmd_present(struct sdcmd *sd)
 {
     UWORD val;
-    
+
     val = Read16(sd->iobase + SAGA_SD_STAT);
 
     //diag("SD_STAT => $%04lx", val);
@@ -744,7 +745,7 @@ UBYTE sdcmd_read_blocks(struct sdcmd *sd, ULONG addr, UBYTE *buff, int blocks)
 
         if (r1)
             continue;
-              
+  
         /* Terminate the read */
         r1 = sdcmd_stop_transmission(sd);
     } while ((r1 & SDERRF_CRC) && (crc_retry-- > 0));

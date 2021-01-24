@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016, Netronome Systems, Inc.
+ * Copyright (C) 2020, Alynna Trypnotk <alynna@kitsunet.net>
  * All rights reserved.
  *
  */
@@ -28,7 +29,7 @@ struct SAGASDBase {
         struct Unit sdu_Unit;
         struct Task sdu_Task;
         TEXT        sdu_Name[6];                /* "SDIOx" */
-        ULONG       sdu_Stack[1024];          /* 4K stack */
+        ULONG       sdu_Stack[1024];            /* 4K stack */
         BOOL        sdu_Enabled;
 
         struct sdcmd sdu_SDCmd;
