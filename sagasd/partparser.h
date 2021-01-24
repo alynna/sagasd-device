@@ -60,7 +60,7 @@ static const MBRTable fsinfo[] = {
 	0x9C, 0x8C,	"DOS"+(char)0,	 	"afs-handler",		// Amiga FFS on MBR  	// These are set up so
 	0x9D, 0x8C,	"SFS"+(char)0,	 	"sfs-handler",		// Amiga SFS on MBR  	// that, in theory, you
 	0x9E, 0x8C,	"PFS"+(char)3,	 	"pfs3aio",	     	// Amiga PFS on MBR  	// can boot from MBR
-	0xAF, 0x80,	"HFS+",				"hfs-handler",	// Apple HFS
+	0xAF, 0x80,	"HFS+",			"hfs-handler",		// Apple HFS
 	0xD8, 0x40,	"CPM"+char(86),	 	"cpm-handler",		// CP/M-86 or CP/M-68k
 	0xDA, 0xC0,	"DATA",			"",			// Non-FS data
 	0xEF, 0x80,	"EFI"+char(0),		"",			// EFI (Location of ApolloOS ROM?)
@@ -71,7 +71,6 @@ static const MBRTable fsinfo[] = {
 #define DosTypeOf(type) UBYTE _type_=0; while (fsinfo[_type_].htype) if (type == fsinfo[_type_].htype) { fsinfo[_type_].atype; break; }
 #define DosHandlerOf(type) UBYTE _type_=0; while (fsinfo[_type_].htype) if ((char[4])type == fsinfo[_type_].htype) { fsinfo[_type_].handler; break; }
 #define AmigaHandlerOf(type) UBYTE _type_=0; while (fsinfo[_type_].htype) if ((char[4])type == fsinfo[_type_].atype) { fsinfo[_type_].handler; break; }
-
 
 // Structure of an MBR
 struct MBR {
